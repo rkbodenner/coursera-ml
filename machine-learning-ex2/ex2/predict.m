@@ -15,11 +15,17 @@ p = zeros(m, 1);
 %               You should set p to a vector of 0's and 1's
 %
 
+aitches = sigmoid(theta'*X');
 
-
-
-
-
+i = 1;
+for h = aitches
+  if ( h >= 0.5 )
+    p(i) = 1;
+  else
+    p(i) = 0;
+  endif
+  i = i + 1;
+endfor
 
 % =========================================================================
 
