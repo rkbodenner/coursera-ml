@@ -30,13 +30,12 @@ X = [ones(m, 1) X];
 %       for each row.
 %       
 
-
-
-
-
-
+Y = all_theta * X';
+H = sigmoid(Y);
+Maxes = max(H, [], 1);
+class_selectors = H == Maxes;
+[p,whatevs] = find(class_selectors);
 
 % =========================================================================
-
 
 end
