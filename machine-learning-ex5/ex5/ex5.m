@@ -218,3 +218,13 @@ end
 
 fprintf('Program paused. Press enter to continue.\n');
 pause;
+
+%%%%%
+% Test error for lambda with lowest validation error
+
+[minErr, iminErr] = min(error_val);
+lambda = lambda_vec(iminErr) - 1;
+[theta] = trainLinearReg(X_poly, y, lambda);
+
+fprintf('Test error with lambda = %f\n', lambda);
+error_test = linearRegCostFunction(X_poly_test, ytest, theta, lambda)
