@@ -66,8 +66,8 @@ fprintf('\nEvaluating the Gaussian Kernel ...\n')
 x1 = [1 2 1]; x2 = [0 4 -1]; sigma = 2;
 sim = gaussianKernel(x1, x2, sigma);
 
-fprintf(['Gaussian Kernel between x1 = [1; 2; 1], x2 = [0; 4; -1], sigma = 0.5 :' ...
-         '\n\t%f\n(this value should be about 0.324652)\n'], sim);
+fprintf(['Gaussian Kernel between x1 = [1; 2; 1], x2 = [0; 4; -1], sigma = %f :' ...
+         '\n\t%f\n(this value should be about 0.324652)\n'], sigma, sim);
 
 fprintf('Program paused. Press enter to continue.\n');
 pause;
@@ -140,9 +140,10 @@ load('ex6data3.mat');
 
 % Try different SVM Parameters here
 [C, sigma] = dataset3Params(X, y, Xval, yval);
+fprintf("C = %f; sigma = %f;\n", C, sigma);
 
 % Train the SVM
-model= svmTrain(X, y, C, @(x1, x2) gaussianKernel(x1, x2, sigma));
+model = svmTrain(X, y, C, @(x1, x2) gaussianKernel(x1, x2, sigma));
 visualizeBoundary(X, y, model);
 
 fprintf('Program paused. Press enter to continue.\n');
