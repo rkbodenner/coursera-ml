@@ -49,13 +49,13 @@ J = J + regTheta + regX;
 % for all movies
 for i = 1:size(X,1)
   raters = find(R(i,:) == 1);
-  X_grad(i,:) = (X(i,:)*Theta(raters,:)' - Y(i,raters)) * Theta(raters,:);
+  X_grad(i,:) = (X(i,:)*Theta(raters,:)' - Y(i,raters)) * Theta(raters,:) + lambda*X(i,:);
 endfor
 
 % for all users
 for j = 1:size(Theta,1)
   rateds = find(R(:,j) == 1);
-  Theta_grad(j,:) = X(rateds,:)' * (X(rateds,:)*Theta(j,:)' - Y(rateds,j));
+  Theta_grad(j,:) = (X(rateds,:)' * (X(rateds,:)*Theta(j,:)' - Y(rateds,j)))' + lambda*Theta(j,:);
 endfor
 
 % Not clever enough for this...
