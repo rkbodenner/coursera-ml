@@ -42,6 +42,10 @@ Theta_grad = zeros(size(Theta));
 
 J = (1/2) * sum(sum(((X*Theta' - Y).^2 .* R)));
 
+regTheta = (lambda/2) * sum(sum(Theta.^2));
+regX     = (lambda/2) * sum(sum(X.^2));
+J = J + regTheta + regX;
+
 % for all movies
 for i = 1:size(X,1)
   raters = find(R(i,:) == 1);
