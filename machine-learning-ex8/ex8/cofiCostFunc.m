@@ -42,6 +42,22 @@ Theta_grad = zeros(size(Theta));
 
 J = (1/2) * sum(sum(((X*Theta' - Y).^2 .* R)));
 
+% for all movies
+for i = 1:size(X,1)
+  raters = find(R(i,:) == 1);
+  X_grad(i,:) = (X(i,:)*Theta(raters,:)' - Y(i,raters)) * Theta(raters,:);
+endfor
+
+% for all users
+for j = 1:size(Theta,1)
+  rateds = find(R(:,j) == 1);
+  Theta_grad(j,:) = X(rateds,:)' * (X(rateds,:)*Theta(j,:)' - Y(rateds,j));
+endfor
+
+% Not clever enough for this...
+%X_grad     =      ((X*Theta' - Y) .* R) * Theta;
+%Theta_grad = X' * ((X*Theta' - Y) .* R);
+
 % =============================================================
 
 grad = [X_grad(:); Theta_grad(:)];
